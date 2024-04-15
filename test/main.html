@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PY8ZRW6WXR"></script>
+    <title>김예나 파이팅</title>
+
+    <script src="../script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PY8ZRW6WXR"></script>
+    <link rel="stylesheet" href="../styles.css"> <!-- CSS 파일을 불러옴 -->
+</head>
+<body> 
+    <a href="../" class="title-link">테스트</a>
+
+    <div id="questionContainer">
+    
+    </div>
+
+    <div id="resultContainer" style="display: none;">
+        <h2>테스트 결과</h2>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        let questionsData = [
+            { question: "아침에 일어났다. 내 렌즈 용품들은 어디에 있지?", choices: ["화장실", 1, "화장대", 2] },
+            { question: "수업 듣다보니 눈이 건조해졌어.. 나는 1시간에 인공눈물을...", choices: ["0회 ~ 3회만 넣어. 인공눈물은 거들뿐.", 1, "4회 이상 넣는 인공눈물 Lover♥︎", 2] },
+            { question: "내가 조금 전에 쓴 일회용 인공눈물은..", choices: ["당연히 바로 버려야지! Flex 하자", 1, "아까우니까 이따 다시 써야지. 뚜껑 닫아서 보관해 놓는다.", 2] },
+            { question: "수업도 끝났겠다, 동기들이랑 술 먹으러 갈건데..", choices: ["렌즈를 빼고 간다", 1, "안경 시러, 렌즈 까고 가야지!", 2] },
+{ question: "나 오늘 렌즈 총 몇시간 꼈지?", choices: ["적정 시간만큼 꼈네~", 1, "아 오늘 좀 넘었다...", 2] },
+{ question: "이제 렌즈 빼야겠다. 오늘 내가 리뉴를..", choices: ["갈았다", 1, "안 갈았다", 2] },
+{ question: "어 하드렌즈 세척액 다 썼네..", choices: ["그냥 소프트렌즈 세척액 쓰지 뭐", 1, "안 돼!! 나가서 사오자", 2] },
+            // 질문 추가
+        ];
+
+        let currentQuestionIndex = 0;
+        let questionsContainer = document.getElementById('questionContainer');
+        let questions;
+
+        // 질문 추가 함수
+        function addQuestion(questionData, questionIndex) {
+            let questionDiv = document.createElement('div');
+            questionDiv.classList.add('question');
+            questionDiv.style.display = 'none'; 
+
+            let questionTitle = document.createElement('h3');
+            questionTitle.textContent = questionData.question;
+
+            let choiceContainer = document.createElement('div');
+            choiceContainer.classList.add('choiceContainer');
+
+            // 답변
+            for (let i = 0; i < questionData.choices.length; i += 2) {
+                let choiceText = questionData.choices[i];
+                let score = questionData.choices[i + 1];
+
+                let label = document.createElement('label');
+                label.classList.add('choice');
+
+                let input = document.createElement('input');
+                input.type = 'radio';
+                input.name = 'answer' + (questionIndex + 1);
+                input.value = score;
+                input.style.display = 'none'; 
+
+                let labelText = document.createTextNode(choiceText);
+                label.appendChild(input);
+                label.appendChild(labelText);
+
+                choiceContainer.appendChild(label);
+            }
+
+            questionDiv.appendChild(questionTitle);
+            questionDiv.appendChild(choiceContainer);
+
+            questionsContainer.appendChild(questionDiv);
+        }
+
+        // 질문 추가
+        questionsData.forEach(function(questionData, index) {
+            addQuestion(questionData, index);
+        });
+
+        questions = document.querySelectorAll('.question');
+
+        document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                showNextQuestion();
+            });
+        });
+
+        function showNextQuestion() {
+            questions[currentQuestionIndex].style.display = "none";
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                questions[currentQuestionIndex].style.display = "block";
+            } else {
+                calculateResult();
+            }
+        }
+
+        window.onload = function() {
+            questions[currentQuestionIndex].style.display = "block"; // 로드 시 첫 번째 질문 표시
+        };
+
+        function calculateResult() {
+            // 문제 답변 가져오기
+            let totalScore = 0;
+            for (let i = 1; i <= questionsData.length; i++) {
+                let answer = document.querySelector('input[name="answer' + i + '"]:checked');
+                totalScore += parseInt(answer.value); // 문자열을 정수로 변환하여 점수에 누적
+            }
+
+            // 결과 계산
+            let type = ""; // 결과 유형 초기화
+
+            // 계산 로직
+            if (totalScore >= 6) {
+                type = "삼계탕 먹고싶다";
+            } else {
+                type = "국밥 먹고싶다";
+            }
+
+            let result = "당신은 <span class='highlight-box-yellow'>" + type + "</span>형입니다!";
+
+            // 결과 표시
+            document.getElementById("result").innerHTML = result;
+            document.getElementById("resultContainer").style.display = "block";
+        }
+    </script>
+</body>
+</html>
