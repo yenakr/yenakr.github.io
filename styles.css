@@ -1,0 +1,292 @@
+@font-face {
+    font-family: 'Ycomputer-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/Ycomputer-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GyeonggiBatang';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/GyeonggiBatang.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'NanumSquareNeo-Variable';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/NanumSquareNeo-Variable.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'NanumSquareNeo-Variable', sans-serif;
+    text-align: center;
+    padding: 50px;
+}
+
+h1 {
+    font-family: 'Ycomputer-Regular', sans-serif;
+    margin-top: 0.2em;
+    margin-bottom: 0.6em;
+}
+
+h2 {
+    margin-bottom: 0.2em;
+}
+
+h3 {
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 0.5em; 
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 7px;
+}
+
+.square-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px; 
+  height: 100px;
+  background-color: #f2f2f2;
+  margin: 10px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  border: none;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+  position: relative; 
+  border-radius: 5px;
+}
+
+
+.button-icon {
+  width: 70px; 
+  height: 70px; 
+  margin-top: 15px; 
+  margin-bottom: 15px; 
+  object-fit: contain; 
+}
+
+.button-text {
+  position: absolute; 
+  bottom: -25px;
+  font-size: 15px;
+  color: black;
+  font-family: 'NanumSquareNeo-Variable', sans-serif;
+}
+
+
+.banner {
+    width: 30%;
+    height: auto;
+}
+
+.title-link {
+    margin-top: 1.5em;
+    display: block;
+    color: black;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.title-link:hover {
+        color: #ff6600;
+}
+
+
+/* 형광펜 */
+.highlight-box {
+      position: relative;
+      display: inline;
+}
+
+.highlight-box::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      z-index: -1;
+      width: 100%;
+      height: 11px; 
+      background-color: #a4e4dc; 
+}
+
+.highlight-box-yellow {
+      position: relative;
+      display: inline;
+}
+
+.highlight-box-yellow::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      z-index: -1;
+      width: 100%;
+      height: 11px; 
+      background-color: #fcc45c; 
+}
+
+.text-highlight {
+      font-weight: bold;
+      position: relative;
+      display: inline;
+}
+
+.text-highlight::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: +2px;
+      z-index: -1;
+      width: 100%;
+      height: 6px; 
+      background-color: #a4e4dc; 
+}
+
+/* 이벤트 배너 개체 */
+.image-button {
+    width: 300px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3px auto; 
+}
+
+.image-button img {
+    max-width: 100%;
+    height: auto;
+    margin: 5px auto; 
+}
+
+
+.copyright {
+    width: auto;
+    height: auto;
+    padding: 7px;
+    margin: auto;
+    text-align: center;
+    font-family: 'NanumSquareNeo-Variable', sans-serif;
+    display: inline-block;
+    border: none;
+    outline: none;
+    background-color: #03c75b;
+}
+
+.copyright-text {
+  font-size: 13px;
+  color: white;
+  font-family: 'NanumSquareNeo-Variable', sans-serif;
+}
+
+.question {
+    margin-bottom: 1.5em;
+}
+
+input[type="radio"] {
+    margin-bottom: 1.0em;
+}
+
+#questionContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#resultContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.choice {
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.choice:hover {
+    background-color: #e0e0e0;
+}
+
+.choice-label {
+    display: block;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.choice-label:hover {
+    background-color: #e0e0e0;
+}
+
+
+
+/* -------------------------------------------------------------- */
+/* ----------------- 모바일 환경에서 viewport 설정 ------------------  */
+
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 5px 5px;
+    }
+
+    header {
+        padding: 5px;
+    }
+
+    nav ul {
+        flex-direction: row;
+        gap: 10px;
+        align-items: center; 
+    }
+
+    nav ul li {
+        margin-right: 20px;
+    }
+
+    .square-button {
+      margin: 7px;
+    }
+
+      .image-button {
+        width: 200px;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+    }
+
+    .image-button img {
+        max-width: 100%; 
+        height: auto; 
+    }
+
+
+
+    .css-center {
+        text-align: center;
+    }
+}
