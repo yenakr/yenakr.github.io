@@ -123,6 +123,7 @@ p {
 }
 
 .highlight-box-yellow {
+      font-weight: bold;
       position: relative;
       display: inline;
 }
@@ -192,10 +193,12 @@ p {
 
 .question {
     margin-bottom: 1.5em;
+    line-height: 1.4;
 }
 
 input[type="radio"] {
     margin-bottom: 1.0em;
+    line-height: 1.4;
 }
 
 #questionContainer {
@@ -203,13 +206,17 @@ input[type="radio"] {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 90%;
 }
 
 #resultContainer {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin-top: 7.0em;
+    margin-bottom: 6.0em;
+}
+
+#wrongAnswersContainer {
+    margin-top: auto;
+    margin-bottom: 1.0em;
 }
 
 .choice {
@@ -242,7 +249,17 @@ input[type="radio"] {
     background-color: #e0e0e0;
 }
 
+#result {
+    line-height: 1.4;
+}
 
+.wrong-answer {
+    line-height: 1.4;
+}
+
+#wrongAnswersList {
+    line-height: 2.0;
+}
 
 /* -------------------------------------------------------------- */
 /* ----------------- 모바일 환경에서 viewport 설정 ------------------  */
