@@ -135,7 +135,7 @@ p {
       z-index: -1;
       width: 100%;
       height: 11px; 
-      background-color: #fcc45c; 
+      background-color: #FDD791; 
 }
 
 .text-highlight {
@@ -155,7 +155,6 @@ p {
       background-color: #a4e4dc; 
 }
 
-/* 이벤트 배너 개체 */
 .image-button {
     width: 300px;
     height: auto;
