@@ -22,17 +22,44 @@
         <p id="result"></p>
     </div>
 
+    <div id="wrongAnswersContainer" style="display: none;">
+        <h3>꼭 실천해요</h3>
+        <span id="wrongAnswersList"></span>
+    </div>
+
     <script>
         let questionsData = [
-            { question: "(아침에 일어나서) 어.. 눈이 안 보이네? 렌즈를 껴야겠다. 내 렌즈 용품들은 어디에 있지?", choices: ["화장실", 0, "화장대", 1] },
-            { question: "수업 듣다보니 눈이 건조해졌어 ㅜ 나는 1시간에 인공눈물을...", choices: ["0회 ~ 3회만 넣어. 인공눈물은 거들뿐.", 1, "4회 이상, 나는 인공눈물 Lover♥︎", 0] },
-            { question: "내가 조금 전에 쓴 일회용 인공눈물은..", choices: ["아까우니깐 나중에 또 쓰자.", 0, "아니야 플렉스~ 그냥 버려!", 1] },
-            { question: "아 수업도 끝났겠다, 동기들이랑 술 먹으러 가볼까?", choices: ["렌즈를 빼고 간다", 1, "안경 시러, 렌즈 까고 가야지!", 0] },
-            { question: "집 도착했다! 나 오늘 렌즈 총 몇시간 낀거지?", choices: ["적정 시간만큼 꼈네~", 1, "아 오늘 좀 넘었다", 0] },
-            { question: "이제 렌즈 빼야지. 오늘 내가 렌즈 보존액을..", choices: ["갈았다", 1, "안 갈았다", 0] },
-            { question: "어 하드렌즈 세척액 다 썼네?", choices: ["그냥 소프트렌즈 세척액 쓰지 뭐", 0, "안 돼! 나가서 사오자", 1] },
+            { question: `(아침에 일어나서) 렌즈를 껴야겠다.\n내 렌즈 용품들은 어디에 있지?`,
+              choices: ["화장실", 0, "화장대", 1],
+              comment: "렌즈 용품은 습하지 않는 서늘한 공간에 보관하기!",
+            },
+            { question: `수업 듣다보니 눈이 건조해졌어 ㅜ\n나는 1시간에 인공눈물을...`,
+              choices: ["0회 ~ 3회만 넣어. 인공눈물은 거들뿐.", 1, "4회 이상, 나는 인공눈물 Lover♥︎", 0],
+              comment: "인공눈물 점안 간격은 2시간 이상이 좋아!",
+            },
+            { question: `내가 조금 전에 쓴 일회용 인공눈물은..`,
+              choices: ["아까우니깐 나중에 또 쓰자.", 0, "아니야 플렉스~ 그냥 버려!", 1],
+              comment: "한 번 개봉한 인공눈물은 즉시 사용 후 쓰레기통으로 바로 보내주자!",
+            },
+            { question: `아 수업도 끝났겠다,\n동기들이랑 술 먹으러 가볼까?`,
+              choices: ["렌즈를 빼고 간다", 1, "안경 시러, 렌즈 까고 가야지!", 0],
+              comment: "술 마실 때는 렌즈 끼지 마세용",
+            },
+            { question: `집 도착했다!\n나 오늘 렌즈 총 몇시간 낀거지?`,
+              choices: ["적정 시간만큼 꼈네~", 1, "아 오늘 좀 넘었다", 0],
+              comment: "적정 시간 지키자",
+            },
+            { question: `이제 렌즈 빼야지.\n오늘 내가 렌즈 보존액을..`,
+              choices: ["갈았다", 1, "안 갈았다", 0],
+              comment: "매일매일 콘택트렌즈 보존액을 다 교체하자",
+            },
+            { question: `어 하드렌즈 세척액 다 썼네?`,
+              choices: ["그냥 소프트렌즈 세척액 쓰지 뭐", 0, "안 돼! 나가서 사오자", 1],
+              comment: "종류에 맞는 거 쓰기",
+            },
             // 질문 추가
         ];
+
 
         let currentQuestionIndex = 0;
         let questionsContainer = document.getElementById('questionContainer');
@@ -104,8 +131,20 @@
             questions[currentQuestionIndex].style.display = "block"; // 로드 시 첫 번째 질문 표시
         };
 
+
+        function checkAnswers() {
+            wrongAnswers = []; 
+            for (let i = 1; i <= questionsData.length; i++) {
+                let answer = document.querySelector('input[name="answer' + i + '"]:checked');
+                if (answer && parseInt(answer.value) === 0) { 
+                 wrongAnswers.push(i); // 틀린 문제를 배열에 추가
+                }
+            }
+        }
+
         function calculateResult() {
-            // 문제 답변 가져오기
+            checkAnswers();
+
             let totalScore = 0;
             for (let i = 1; i <= questionsData.length; i++) {
                 let answer = document.querySelector('input[name="answer' + i + '"]:checked');
@@ -113,23 +152,45 @@
             }
 
             // 결과 계산
-            let type = ""; // 결과 유형 초기화
+            let type = ""; // 결과 유형
+            let message = "";
 
             // 계산 로직
             if ( totalScore == 0 ) {
-                type = "눈 혹사";
+                type = "눈혹사";
+                message = "눈 건강을 위해 노력해봐요";
             } else if ( totalScore <= 3 ){
-                type = "막눈광 (막 눈쓰는 광인)";
+                type = "막눈광(막 눈쓰는 광인)";
+                message = "눈 건강을 위해 노력해봐요";
             } else if ( totalScore <= 5 ){
-                type = "EYE 캔 두 잇";
+                type = "EYE캔두잇";
+                message = "잘 하고 있지만 조금만 더!";
             } else {
                 type = "안과의사";
+                message = "멋져요 :)";
             }
 
-            let result = "당신은 <span class='highlight-box-yellow'>" + type + "</span>형입니다!";
+            let result = "당신은 <span class='highlight-box-yellow'>" + type + "</span>형!";
+            let messageHtml = "<br>" + message;
+
+
+            if (wrongAnswers.length > 0) {
+    document.getElementById("wrongAnswersContainer").style.display = "block";
+    let wrongAnswersList = document.getElementById("wrongAnswersList");
+    wrongAnswersList.innerHTML = "";
+
+    wrongAnswers.forEach(function(index) {
+        let comment = questionsData[index - 1].comment; // 변경된 부분
+        let span = document.createElement("span");
+        span.innerHTML = comment;
+        span.classList.add("comment"); 
+        wrongAnswersList.appendChild(span);
+        wrongAnswersList.appendChild(document.createElement("br")); // 줄바꿈
+    });
+}
 
             // 결과 표시
-            document.getElementById("result").innerHTML = result;
+            document.getElementById("result").innerHTML = result + messageHtml;
             document.getElementById("resultContainer").style.display = "block";
         }
     </script>
