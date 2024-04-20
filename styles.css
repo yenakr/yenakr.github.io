@@ -304,6 +304,46 @@ input[type="radio"] {
     line-height: 1.5;
 }
 
+.info p {
+    word-break: keep-all;
+}
+
+.table {
+    width: 100%; 
+    margin: 20px auto; 
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table .table-head {
+    background-color: #f2f2f2;
+}
+
+.table th.center,
+.table td.center {
+    text-align: center;
+}
+
+.center {
+    text-align: center;
+}
+
+#additionalText {
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    box-sizing: border-box;
+}
+
 /* -------------------------------------------------------------- */
 /* ----------------- 모바일 환경에서 viewport 설정 ------------------  */
 
