@@ -8,7 +8,7 @@
 
     <script src="../script.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-PY8ZRW6WXR"></script>
-        <link rel="icon" href="icon/logo.png" type="image/png">
+    <link rel="icon" href="../icon/logo.png" type="image/png">
     <link rel="stylesheet" href="../styles.css"> <!-- CSS 파일을 불러옴 -->
 </head>
 <body> 
@@ -16,6 +16,27 @@
 
     <div id="questionContainer">
     
+    </div>
+
+    <div id="additionalText" style="display: none;">
+        <table class="table">
+            <tr>
+                <th>렌즈 종류</th>
+                <th>적정 시간</th>
+            </tr>
+            <tr>
+                <td>하드렌즈</td>
+                <td>약 10시간</td>
+            </tr>
+            <tr>
+                <td>소프트렌즈</td>
+                <td>약 8시간</td>
+            </tr>
+            <tr>
+                <td>컬러렌즈</td>
+                <td>약 4시간</td>
+            </tr>
+        </table>
     </div>
 
     <div id="resultContainer" style="display: none;">
@@ -38,11 +59,13 @@
 
     <script>
         let questionsData = [
-            { question: `(아침에 일어나서) 렌즈를 껴야겠다.내 렌즈 용품들은 어디에 있지?`,
+            { question: `(아침에 일어나서) 렌즈를 껴야겠다.
+                내 렌즈 용품들은 어디에 있지?`,
               choices: ["화장실", 0, "화장대", 1],
               comment: { text: "렌즈 용품은 습하지 않은 공간에 보관하기", link: "../test/types.html?data=1" },
             },
-            { question: `수업 듣다보니 눈이 건조해졌어 ㅜ 나는 1시간에 인공눈물을...`,
+            { question: `수업 듣다보니 눈이 건조해졌어 ㅜ
+                나는 1시간에 인공눈물을...`,
               choices: ["0회 ~ 3회만 넣어. 인공눈물은 거들뿐.", 1, "4회 이상, 나는 인공눈물 Lover♥︎", 0],
               comment: { text: "인공눈물 점안 간격은 2시간 이상이 좋아", link: "../test/types.html?data=2" },
             },
@@ -50,15 +73,18 @@
               choices: ["아까우니깐 나중에 또 쓰자.", 0, "아니야 플렉스~ 그냥 버려!", 1],
               comment: { text: "개봉한 인공눈물은 사용 후 쓰레기통으로!", link: "../test/types.html?data=3" },
             },
-            { question: `수업도 끝났겠다, 동기들이랑 술 먹으러 가볼까?`,
+            { question: `수업도 끝났겠다,
+                동기들이랑 술 먹으러 가볼까?`,
               choices: ["렌즈를 빼고 간다", 1, "안경 시러, 렌즈 끼고 가야지!", 0],
               comment: { text: "음주 시에는 렌즈 착용을 지양하자.", link: "../test/types.html?data=4" },
             },
-            { question: `집 도착했다! 나 오늘 렌즈 얼마나 낀거지?`,
+            { question: `집 도착했다!
+                나 오늘 렌즈 얼마나 낀거지?`,
               choices: ["적정 시간만큼 꼈네~", 1, "아 오늘 좀 넘었다", 0],
               comment: { text: "렌즈 착용 적정시간은 꼭 지켜야해", link: "../test/types.html?data=5" },
             },
-            { question: `이제 렌즈 빼야지~ 오늘 내가 렌즈 보존액을..`,
+            { question: `이제 렌즈 빼야지~
+                오늘 내가 렌즈 보존액을..`,
               choices: ["갈았다", 1, "안 갈았다", 0],
               comment: { text: "매일매일 콘택트렌즈 보존액을 다 교체하자", link: "../test/types.html?data=6" },
             },
@@ -87,7 +113,7 @@
             choiceContainer.classList.add('choiceContainer');
 
             // 답변
-            for (let i = 0; i < questionData.choices.length; i += 2) {
+            for ( let i = 0; i < questionData.choices.length; i += 2 ) {
                 let choiceText = questionData.choices[i];
                 let score = questionData.choices[i + 1];
 
@@ -109,8 +135,8 @@
 
             questionDiv.appendChild(questionTitle);
             questionDiv.appendChild(choiceContainer);
-
             questionsContainer.appendChild(questionDiv);
+        
         }
 
         // 질문 추가
@@ -129,8 +155,16 @@
         function showNextQuestion() {
             questions[currentQuestionIndex].style.display = "none";
             currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
+            if ( currentQuestionIndex < questions.length ) {
                 questions[currentQuestionIndex].style.display = "block";
+                // 줄바꿈
+                questions[currentQuestionIndex].querySelector('h3').innerHTML = questionsData[currentQuestionIndex].question.replace(/\n/g, '<br>');
+                if ( currentQuestionIndex === 4 ) {
+                    document.getElementById("additionalText").style.display = "block";
+                } else {
+                    document.getElementById("additionalText").style.display = "none";
+                }
+            
             } else {
                 calculateResult();
             }
@@ -138,14 +172,21 @@
 
         window.onload = function() {
             questions[currentQuestionIndex].style.display = "block"; // 로드 시 첫 번째 질문 표시
+
+            // 줄바꿈 적용
+            questions[currentQuestionIndex].querySelector('h3').innerHTML = questionsData[currentQuestionIndex].question.replace(/\n/g, '<br>');
+        
+            if ( currentQuestionIndex === 4 ) {
+                document.getElementById("additionalText").style.display = "block";
+            }
         };
 
 
         function checkAnswers() {
             wrongAnswers = []; 
-            for (let i = 1; i <= questionsData.length; i++) {
+            for ( let i = 1; i <= questionsData.length; i++ ) {
                 let answer = document.querySelector('input[name="answer' + i + '"]:checked');
-                if (answer && parseInt(answer.value) === 0) { 
+                if ( answer && parseInt(answer.value) === 0 ) { 
                  wrongAnswers.push(i); // 틀린 문제를 배열에 추가
                 }
             }
@@ -155,7 +196,7 @@
             checkAnswers();
 
             let totalScore = 0;
-            for (let i = 1; i <= questionsData.length; i++) {
+            for ( let i = 1; i <= questionsData.length; i++ ) {
                 let answer = document.querySelector('input[name="answer' + i + '"]:checked');
                 totalScore += parseInt(answer.value); // 문자열을 정수로 변환하여 점수에 누적
             }
@@ -183,7 +224,7 @@
             let messageHtml = "<br>" + message;
 
 
-            if (wrongAnswers.length > 0) {
+            if ( wrongAnswers.length > 0 ) {
                 document.getElementById("wrongAnswersContainer").style.display = "block";
                 let wrongAnswersList = document.getElementById("wrongAnswersList");
                 wrongAnswersList.innerHTML = "";
@@ -211,7 +252,7 @@
             document.getElementById("resultContainer").style.display = "block";
 
             let imageButton = document.querySelector('.image-button');
-                if (imageButton) {
+                if ( imageButton ) {
                     imageButton.style.display = "block";
                 }
         }
