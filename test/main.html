@@ -50,14 +50,19 @@
         <span id="wrongAnswersList"></span>
     </div>
 
-
-    <div class="image-button" style="display: none;">
+    <div class="others" style="display: none;">
         <br>
         <h3><span class="highlight-box-yellow">이용 후기를 남겨주세요!</span></h3>
+        <div class="image-button">
         <a href="https://form.naver.com/response/CgkAimM1JBVR51zdPf1twg" target="_blank"> 
             <img src="../icon/share.png" alt="설문 참여하기">
         </a>
+        </div>
     </div>
+
+    
+        
+  
 
     <script>
         let questionsData = [
@@ -253,9 +258,9 @@
             document.getElementById("result").innerHTML = result + messageHtml;
             document.getElementById("resultContainer").style.display = "block";
 
-            let imageButton = document.querySelector('.image-button');
-                if ( imageButton ) {
-                    imageButton.style.display = "block";
+            let others = document.querySelector('.others');
+                if ( others ) {
+                    others.style.display = "block";
                 }
         }
     </script>
