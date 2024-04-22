@@ -36,11 +36,15 @@ h2 {
 }
 
 h3 {
-    margin-bottom: 0.5em;
+    margin-bottom: 3em;
 }
 
 p {
     margin-bottom: 1em; 
+}
+
+.title {
+    margin-bottom: 0.5em;
 }
 
 .button-container {
@@ -154,6 +158,23 @@ p {
     width: 100%;
     height: 11px; 
     background-color: #fdd6d0; 
+}
+
+.highlight-box-blue {
+    font-weight: bold;
+    position: relative;
+    display: inline;
+}
+
+.highlight-box-blue::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    z-index: -1;
+    width: 100%;
+    height: 11px; 
+    background-color: #c1dbff; 
 }
 
 .text-highlight {
