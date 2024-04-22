@@ -45,14 +45,14 @@
     </div>
 
     <div id="wrongAnswersContainer" style="display: none;">
-        <h3>너를 위한 <span class='highlight-box-pink'>맞춤형 조언</span></h3>
+        <h3 class="title">너를 위한 <span class='highlight-box-pink'>맞춤형 조언</span></h3>
         <p>각 항목을 클릭해서 자세한 정보 확인하자!</p>
         <span id="wrongAnswersList"></span>
     </div>
 
     <div class="others" style="display: none;">
         <br>
-        <h3><span class="highlight-box-yellow">이용 후기를 남겨주세요!</span></h3>
+        <h3 class="title"><span class="highlight-box-yellow">이용 후기를 남겨주세요!</span></h3>
         <div class="image-button">
         <a href="https://form.naver.com/response/CgkAimM1JBVR51zdPf1twg" target="_blank"> 
             <img src="../icon/share.png" alt="설문 참여하기">
@@ -67,35 +67,42 @@
     <script>
         let questionsData = [
             { question: `(아침에 일어나서) 렌즈를 껴야겠다.
-                내 렌즈 용품들은 어디에 있지?`,
+                내 렌즈 용품들은 어디에 있지?
+                  `,
               choices: ["화장실", 0, "화장대", 1],
               comment: { text: "렌즈용품은 습하지 않은 공간에 보관하자", link: "../test/types.html?data=1" },
             },
             { question: `수업 듣다보니 눈이 건조해졌어 ㅜ
-                나는 1시간에 인공눈물을...`,
+                나는 1시간에 인공눈물을...
+                 `,
               choices: ["0회 ~ 3회만 넣어. 인공눈물은 거들뿐.", 1, "4회 이상, 나는 인공눈물 Lover♥︎", 0],
               comment: { text: "인공눈물 점안 간격은 2시간 이상이 좋아", link: "../test/types.html?data=2" },
             },
-            { question: `내가 조금 전에 쓴 일회용 인공눈물은..`,
+            { question: `내가 조금 전에 쓴 일회용 인공눈물은..
+                 `,
               choices: ["아까우니깐 나중에 또 쓰자.", 0, "아니야 플렉스~ 그냥 버려!", 1],
               comment: { text: "개봉한 인공눈물은 사용 후 쓰레기통으로!", link: "../test/types.html?data=3" },
             },
             { question: `수업도 끝났겠다,
-                동기들이랑 술 먹으러 가볼까?`,
+                동기들이랑 술 먹으러 가볼까?
+                 `,
               choices: ["렌즈를 빼고 간다", 1, "안경 시러, 렌즈 끼고 가야지!", 0],
               comment: { text: "음주 시에는 렌즈 착용을 지양하자", link: "../test/types.html?data=4" },
             },
             { question: `집 도착했다!
-                나 오늘 렌즈 얼마나 낀거지?`,
+                나 오늘 렌즈 얼마나 낀거지?
+                 `,
               choices: ["적정 시간만큼 꼈네~", 1, "아 오늘 좀 넘었다", 0],
               comment: { text: "렌즈 착용 적정시간은 꼭 지키자", link: "../test/types.html?data=5" },
             },
             { question: `이제 렌즈 빼야지~
-                오늘 내가 렌즈 보존액을..`,
+                오늘 내가 렌즈 보존액을..
+                 `,
               choices: ["갈았다", 1, "안 갈았다", 0],
               comment: { text: "매일매일 콘택트렌즈 보존액을 다 교체하자", link: "../test/types.html?data=6" },
             },
-            { question: `어, 하드렌즈 보존액 다 썼네?`,
+            { question: `어, 하드렌즈 보존액 다 썼네?
+                 `,
               choices: ["그냥 소프트렌즈 보존액 쓰지 뭐", 0, "안 돼! 나가서 사오자", 1],
               comment: { text: "꼭 종류에 맞는 보존액을 사용하자", link: "../test/types.html?data=7" },
             },
