@@ -132,9 +132,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         } else {
             currentUser = null;
-            loginView.classList.remove('hidden');
-            setupView.classList.add('hidden');
-            dashboardView.classList.add('hidden');
+            if(sessionStorage.getItem('calorieFitGuest') === 'true') {
+                // 게스트 모드 유지
+                document.getElementById('user-display-name').innerHTML = '<span style="color:#f43f5e;"><i class="ri-alert-line"></i> 게스트 (저장불가)</span>';
+                loginView.classList.add('hidden');
+                const storedGoal = localStorage.getItem('calorieFitGoal');
+                if (storedGoal) showDashboard(JSON.parse(storedGoal));
+                else setupView.classList.remove('hidden');
+            } else {
+                loginView.classList.remove('hidden');
+                setupView.classList.add('hidden');
+                dashboardView.classList.add('hidden');
+            }
         }
     });
 
@@ -146,11 +155,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    const guestBtn = document.getElementById('guest-login-btn');
+    if(guestBtn) {
+        guestBtn.addEventListener('click', () => {
+            sessionStorage.setItem('calorieFitGuest', 'true');
+            document.getElementById('user-display-name').innerHTML = '<span style="color:#f43f5e;"><i class="ri-alert-line"></i> 게스트 (저장불가)</span>';
+            loginView.classList.add('hidden');
+            const storedGoal = localStorage.getItem('calorieFitGoal');
+            if (storedGoal) showDashboard(JSON.parse(storedGoal));
+            else setupView.classList.remove('hidden');
+        });
+    }
+
     document.getElementById('logout-btn').addEventListener('click', () => {
         signOut(auth).then(() => {
             localStorage.removeItem('calorieFitGoal');
             localStorage.removeItem('calorieFitLogs');
             localStorage.removeItem('calorieFitWeights');
+            sessionStorage.removeItem('calorieFitGuest');
             location.reload(); 
         });
     });
