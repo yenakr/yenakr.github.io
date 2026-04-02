@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>체중 감량 가이드 - CalorieFit</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .article-card {
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: opacity 0.2s;
+        }
+
+        .back-btn:hover {
+            opacity: 0.8;
+        }
+
+        .article-content h2 {
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .article-content p {
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .highlight-box {
+            background: rgba(244, 63, 94, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--text-main);
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" style="max-width: 800px;">
+        <div class="glass-card article-card">
+            <a href="index.html" class="back-btn"><i class="ri-arrow-left-line"></i> 플래너로 돌아가기</a>
+            
+            <div class="logo-area">
+                <i class="ri-book-read-fill"></i>
+                <h1>체중 감량의 핵심 원리</h1>
+            </div>
+            
+            <div class="article-content">
+                <h2>1. 기초대사량(BMR)이란?</h2>
+                <p>
+                    우리가 숨만 쉬고 아무것도 하지 않아도 생명 유지를 위해 우리 몸이 저절로 소모하는 최소한의 에너지를 <strong>기초대사량(BMR, Basal Metabolic Rate)</strong>이라고 합니다. 나이, 성별, 키, 몸무게에 따라 달라지며 건강한 다이어트를 위해서는 최소한 기초대사량보다는 많은 칼로리를 섭취해주어야 합니다.
+                </p>
+
+                <h2>2. 유지 칼로리(TDEE)란?</h2>
+                <p>
+                    기초대사량에 일상생활에서의 활동(걷기, 일하기, 운동 등)으로 소모되는 에너지를 모두 합한 것을 <strong>유지 칼로리(TDEE, Total Daily Energy Expenditure)</strong>라고 부릅니다.
+                    만약 하루에 정확히 TDEE만큼의 칼로리를 먹는다면, 당신의 체중은 찌지도 빠지지도 않고 <strong>유지</strong>됩니다.
+                </p>
+
+                <div class="highlight-box">
+                    <p>💡 CalorieFit 앱은 전 세계적으로 가장 신뢰받는 'Mifflin-St Jeor 방정식'을 사용하여 당신의 기초대사량과 유지 칼로리를 매우 정밀하게 계산합니다.</p>
+                </div>
+
+                <h2>3. 칼로리 적자(Calorie Deficit)의 마법</h2>
+                <p>
+                    다이어트의 절대 불변의 법칙은 <strong>"소모하는 칼로리(TDEE)보다 적게 먹는 것"</strong>입니다. 이것을 칼로리 적자라고 합니다.
+                </p>
+                <p>
+                    과학적으로 <strong>순수 체지방 1kg을 태우기 위해서는 약 7,700kcal의 에너지가 부족해져야(적자)</strong> 합니다.
+                    예를 들어 한 달(30일) 동안 체지방 2kg을 감량하고 싶다면, 총 15,400kcal의 적자를 내야 하며, 이를 30일로 나누면 하루에 약 500kcal씩 덜 먹거나 운동으로 더 소모해야 한다는 계산이 나옵니다.
+                </p>
+
+                <h2>4. 체중 변화와 대사량의 관계</h2>
+                <p>
+                    몸집이 작아지면 엔진(기초대사)의 크기도 작아집니다. 즉, 다이어트를 성공적으로 진행해서 체중이 10kg 빠졌다면 당신의 유지 칼로리(TDEE) 역시 과거보다 낮아집니다.
+                </p>
+                <div class="highlight-box">
+                    <p>⚠️ 과거의 몸무게로 계산된 칼로리를 계속 먹으면 "정체기"가 옵니다. CalorieFit은 매일매일의 최신 체중을 반영하여 당신의 TDEE와 추천 섭취량을 실시간으로 조율해 줍니다!</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
