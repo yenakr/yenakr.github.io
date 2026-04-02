@@ -18,13 +18,22 @@
 <body>
     <div id="app">
         <!-- LOGIN VIEW -->
-        <main id="login-view" class="view hidden" style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80vh; text-align:center;">
+        <main id="login-view" class="view hidden"
+            style="display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:80vh; text-align:center;">
             <div class="glass-card" style="padding: 3rem; max-width: 400px; width: 100%;">
-                <h1 style="margin-bottom:1rem; font-size: 2.5rem;"><i class="ri-fire-fill" style="color:var(--primary);"></i> CalorieFit</h1>
-                <p style="color:var(--text-muted); margin-bottom: 2.5rem; line-height:1.5;">어디서든 완벽히 동기화되는<br>나만의 다이어트 매니저</p>
-                <button type="button" id="google-login-btn" style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.8rem; background:white; color:#333; border:none; padding:1rem; border-radius:12px; font-weight:700; font-size:1.1rem; cursor:pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition:transform 0.2s;">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="24" alt="G"> 
+                <h1 style="margin-bottom:1rem; font-size: 2.5rem;"><i class="ri-fire-fill"
+                        style="color:var(--primary);"></i> CalorieFit</h1>
+                <p style="color:var(--text-muted); margin-bottom: 2.5rem; line-height:1.5;">어디서든 완벽히 동기화되는<br>나만의 다이어트
+                    매니저</p>
+                <button type="button" id="google-login-btn"
+                    style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.8rem; background:white; color:#333; border:none; padding:1rem; border-radius:12px; font-weight:700; font-size:1.1rem; cursor:pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition:transform 0.2s;">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="24"
+                        alt="G">
                     Google 계정으로 시작하기
+                </button>
+                <button type="button" id="guest-login-btn"
+                    style="width:100%; margin-top: 1rem; background:transparent; color:var(--text-muted); border:none; font-weight:600; text-decoration:underline; font-size: 0.9rem; cursor:pointer;">
+                    로그인 없이 체험하기
                 </button>
             </div>
         </main>
@@ -124,8 +133,11 @@
                 </div>
                 <div style="display:flex; align-items:center; gap:1rem;">
                     <div style="display:flex; flex-direction:column; align-items:flex-end;">
-                        <span id="user-display-name" style="font-size:0.85rem; color:var(--text-muted); font-weight:600;"></span>
-                        <button type="button" id="logout-btn" style="background:none; border:none; color:var(--primary); font-size:0.8rem; font-weight:700; cursor:pointer; padding:0; margin-top:0.2rem;"><i class="ri-logout-box-r-line"></i> 로그아웃</button>
+                        <span id="user-display-name"
+                            style="font-size:0.85rem; color:var(--text-muted); font-weight:600;"></span>
+                        <button type="button" id="logout-btn"
+                            style="background:none; border:none; color:var(--primary); font-size:0.8rem; font-weight:700; cursor:pointer; padding:0; margin-top:0.2rem;"><i
+                                class="ri-logout-box-r-line"></i> 로그아웃</button>
                     </div>
                     <button id="reset-btn" class="btn-icon" title="목표 재설정"><i class="ri-settings-4-line"></i></button>
                 </div>
