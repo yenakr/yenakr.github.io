@@ -30,16 +30,16 @@
                     style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.8rem; background:white; color:#333; border:none; padding:1rem; border-radius:12px; font-weight:700; font-size:1.1rem; cursor:pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition:transform 0.2s;">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" width="24"
                         alt="G">
-                    Google 계정으로 시작하기
+                    Google로 시작하기
                 </button>
                 <button type="button" id="github-login-btn"
                     style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.8rem; background:#24292e; color:white; border:none; padding:1rem; border-radius:12px; font-weight:700; font-size:1.1rem; cursor:pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition:transform 0.2s; margin-top: 0.8rem;">
                     <i class="ri-github-fill" style="font-size: 1.5rem; line-height: 1;"></i>
-                    GitHub 계정으로 시작하기
+                    GitHub로 시작하기
                 </button>
                 <button type="button" id="guest-login-btn"
                     style="width:100%; margin-top: 1.2rem; background:transparent; color:var(--text-muted); border:none; font-weight:600; text-decoration:underline; font-size: 0.9rem; cursor:pointer;">
-                    로그인 없이 체험하기
+                    체험하기
                 </button>
             </div>
         </main>
@@ -227,7 +227,7 @@
                         <div class="icon-wrapper pink"><i class="ri-drop-fill"></i></div>
                         <div class="stat-content"
                             style="flex-direction:row; justify-content:space-between; align-items:center;">
-                            <span class="label">🔥 누적 적자 칼로리와 예상 감량치</span>
+                            <span class="label">🔥 누적 적자량</span>
                             <div class="row" style="text-align:right;">
                                 <span class="value" id="cumulative-deficit" style="font-size:1.1rem;">0</span> <span
                                     class="unit">kcal</span>
@@ -242,15 +242,15 @@
 
             <!-- Exercise Logger (UPDATED) -->
             <div class="glass-card logger-card mt-6">
-                <h3 style="color: var(--success);"><i class="ri-run-line"></i> 오늘 활동 칼로리</h3>
-                <p style="font-size:0.85rem; color:var(--text-muted); margin:0.5rem 0 1rem 0;">귀찮게 일일이 추가하실 필요 없습니다.
-                    스마트워치 및 건강 앱에 기록된 오늘의 <strong>활동 칼로리(기초대사량 제외)</strong> 수치만 입력해 주세요!</p>
+                <h3 style="color: var(--success);"><i class="ri-run-line"></i> 활동 칼로리</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin:0.5rem 0 1rem 0;">
+                    스마트워치 및 건강 앱에 기록된 오늘의 <strong>활동 칼로리(기초대사량 제외)</strong> 수치를 입력해 주세요!</p>
                 <form id="exercise-form" style="display:flex; align-items:center; gap:0.5rem;">
-                    <input type="number" id="exercise-calories" placeholder="활동 칼로리 입력 (예: 450)" required min="0"
+                    <input type="number" id="exercise-calories" placeholder="예: 450" required min="0"
                         style="flex:1; padding:0.8rem; border-radius:12px; border:1px solid var(--border-soft); font-size:1rem; color:var(--text-main);">
                     <button type="submit" class="btn-primary-small"
                         style="background:var(--success); white-space:nowrap; height:auto; padding:0.8rem 1.2rem; font-size:1rem;"><i
-                            class="ri-check-line"></i> 적용</button>
+                            class="ri-check-line"></i> 확인</button>
                 </form>
             </div>
 
@@ -273,8 +273,9 @@
                 </div>
             </div>
 
-            <button type="button" id="share-btn" class="btn-primary mt-6" style="width:100%; display:flex; justify-content:center; align-items:center; gap:0.5rem; background:linear-gradient(135deg, #f43f5e, #fb7185); margin-top:2rem;">
-                <i class="ri-instagram-line"></i> 스포티파이 감성으로 성과 공유하기
+            <button type="button" id="share-btn" class="btn-primary mt-6"
+                style="width:100%; display:flex; justify-content:center; align-items:center; gap:0.5rem; background:linear-gradient(135deg, #f43f5e, #fb7185); margin-top:2rem;">
+                <i class="ri-instagram-line"></i> 성과 공유하기
             </button>
         </main>
 
@@ -315,7 +316,7 @@
                         data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
                         data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko"
                         crossorigin="anonymous" async>
-                    </script>
+                        </script>
                 </div>
             </div>
         </main>
@@ -323,8 +324,10 @@
         <div id="image-modal" class="modal hidden">
             <div class="modal-content" style="max-width: 400px; padding: 1.5rem; text-align: center;">
                 <h3 style="margin-bottom:1rem; color:var(--primary);">📸 공유 카드가 완성됐어요!</h3>
-                <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">이미지를 <strong>길게 눌러 '사진 앱에 저장'</strong>하시거나 인스타그램 스토리에 바로 공유해보세요!</p>
-                <img id="generated-image" src="" style="width:100%; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); margin-bottom:1.5rem; display:block;" />
+                <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:1rem;">이미지를 <strong>길게 눌러 '사진 앱에
+                        저장'</strong>하시거나 인스타그램 스토리에 바로 공유해보세요!</p>
+                <img id="generated-image" src=""
+                    style="width:100%; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.2); margin-bottom:1.5rem; display:block;" />
                 <button type="button" id="close-image-modal-btn" class="btn-primary" style="width:100%;">닫기</button>
             </div>
         </div>
@@ -332,9 +335,11 @@
 
     <!-- SHARE CARD TEMPLATE (HIDDEN) -->
     <div id="share-template" style="position: absolute; left: -9999px; top: -9999px;">
-        <div id="share-card" style="width: 1080px; height: 1920px; background: linear-gradient(135deg, #1f2937, #111827); position: relative; font-family: 'Outfit', 'Noto Sans KR', sans-serif; padding: 120px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
+        <div id="share-card"
+            style="width: 1080px; height: 1920px; background: linear-gradient(135deg, #1f2937, #111827); position: relative; font-family: 'Outfit', 'Noto Sans KR', sans-serif; padding: 120px 80px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between;">
             <div style="display: flex; align-items: center; gap: 30px;">
-                <div style="width: 120px; height: 120px; background: #f43f5e; border-radius: 35px; display: flex; align-items: center; justify-content: center;">
+                <div
+                    style="width: 120px; height: 120px; background: #f43f5e; border-radius: 35px; display: flex; align-items: center; justify-content: center;">
                     <i class="ri-fire-fill" style="font-size: 70px; color: white;"></i>
                 </div>
                 <div>
@@ -344,26 +349,38 @@
             </div>
             <div style="flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 60px;">
                 <div style="text-align: center;">
-                    <h2 id="share-date" style="color: #9ca3af; font-size: 45px; font-weight: 400; margin-bottom: 20px;">2024년 4월 7일</h2>
-                    <div style="background: rgba(255,255,255,0.05); border-radius: 50px; padding: 80px; border: 2px solid rgba(255,255,255,0.1);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px;">
-                            <span style="color: #e5e7eb; font-size: 55px;"><i class="ri-restaurant-2-line" style="color:#f43f5e;"></i> 오늘 섭취</span>
-                            <span style="color: white; font-size: 65px; font-weight: 700;"><span id="share-food">0</span> kcal</span>
+                    <h2 id="share-date" style="color: #9ca3af; font-size: 45px; font-weight: 400; margin-bottom: 20px;">
+                        2024년 4월 7일</h2>
+                    <div
+                        style="background: rgba(255,255,255,0.05); border-radius: 50px; padding: 80px; border: 2px solid rgba(255,255,255,0.1);">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px;">
+                            <span style="color: #e5e7eb; font-size: 55px;"><i class="ri-restaurant-2-line"
+                                    style="color:#f43f5e;"></i> 오늘 섭취</span>
+                            <span style="color: white; font-size: 65px; font-weight: 700;"><span
+                                    id="share-food">0</span> kcal</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px;">
-                            <span style="color: #e5e7eb; font-size: 55px;"><i class="ri-run-line" style="color:#10b981;"></i> 오늘 활동</span>
-                            <span style="color: white; font-size: 65px; font-weight: 700;"><span id="share-exercise">0</span> kcal</span>
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 50px;">
+                            <span style="color: #e5e7eb; font-size: 55px;"><i class="ri-run-line"
+                                    style="color:#10b981;"></i> 오늘 활동</span>
+                            <span style="color: white; font-size: 65px; font-weight: 700;"><span
+                                    id="share-exercise">0</span> kcal</span>
                         </div>
                         <div style="height: 2px; background: rgba(255,255,255,0.1); margin: 60px 0;"></div>
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span style="color: #fb7185; font-size: 60px; font-weight: 600;">🔥 오늘 순수 적자</span>
-                            <span style="color: #fb7185; font-size: 80px; font-weight: 800;"><span id="share-deficit">0</span> kcal</span>
+                            <span style="color: #fb7185; font-size: 80px; font-weight: 800;"><span
+                                    id="share-deficit">0</span> kcal</span>
                         </div>
                     </div>
                 </div>
-                <div style="text-align: center; background: linear-gradient(to right, rgba(244,63,94,0.1), rgba(244,63,94,0)); border-left: 10px solid #f43f5e; padding: 60px; border-radius: 30px;">
-                    <h3 style="color: white; font-size: 50px; margin: 0 0 20px 0;">🎉 누적 성과: 총 <span id="share-cumulative-deficit" style="color: #f43f5e;">0</span> kcal 달성!</h3>
-                    <p style="color: #d1d5db; font-size: 45px; margin: 0;">지금까지 약 <span id="share-expected-loss" style="color: white; font-weight: 700;">0</span>kg 감량 효과 🚀</p>
+                <div
+                    style="text-align: center; background: linear-gradient(to right, rgba(244,63,94,0.1), rgba(244,63,94,0)); border-left: 10px solid #f43f5e; padding: 60px; border-radius: 30px;">
+                    <h3 style="color: white; font-size: 50px; margin: 0 0 20px 0;">🎉 누적 성과: 총 <span
+                            id="share-cumulative-deficit" style="color: #f43f5e;">0</span> kcal 달성!</h3>
+                    <p style="color: #d1d5db; font-size: 45px; margin: 0;">지금까지 약 <span id="share-expected-loss"
+                            style="color: white; font-weight: 700;">0</span>kg 감량 효과 🚀</p>
                 </div>
             </div>
             <div style="text-align: center; color: #6b7280; font-size: 35px;">
@@ -372,43 +389,43 @@
         </div>
     </div>
 
-        <!-- Chart Modal -->
-        <div id="chart-modal" class="modal-overlay hidden">
-            <div class="glass-card modal-content" style="width: 90%; max-width: 500px; padding: 1.5rem;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
-                    <h3 style="margin:0; color:var(--text-main);">📈 체중 변화 추이</h3>
-                    <button type="button" id="close-chart-btn" class="btn-icon" style="font-size: 1.5rem; padding:0;"><i
-                            class="ri-close-line"></i></button>
-                </div>
-                <div class="toggle-group mb-4" style="margin-bottom:1rem;">
-                    <input type="radio" id="chart-day" name="chart-range" value="day" checked>
-                    <label for="chart-day" style="padding:0.4rem; font-size:0.9rem;">일간 (14일)</label>
-                    <input type="radio" id="chart-week" name="chart-range" value="week">
-                    <label for="chart-week" style="padding:0.4rem; font-size:0.9rem;">주간 (8주)</label>
-                    <input type="radio" id="chart-month" name="chart-range" value="month">
-                    <label for="chart-month" style="padding:0.4rem; font-size:0.9rem;">월간 (6개월)</label>
-                </div>
-                <div>
-                    <canvas id="weightChart" width="400" height="250"></canvas>
-                </div>
+    <!-- Chart Modal -->
+    <div id="chart-modal" class="modal-overlay hidden">
+        <div class="glass-card modal-content" style="width: 90%; max-width: 500px; padding: 1.5rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+                <h3 style="margin:0; color:var(--text-main);">📈 체중 변화 추이</h3>
+                <button type="button" id="close-chart-btn" class="btn-icon" style="font-size: 1.5rem; padding:0;"><i
+                        class="ri-close-line"></i></button>
+            </div>
+            <div class="toggle-group mb-4" style="margin-bottom:1rem;">
+                <input type="radio" id="chart-day" name="chart-range" value="day" checked>
+                <label for="chart-day" style="padding:0.4rem; font-size:0.9rem;">일간 (14일)</label>
+                <input type="radio" id="chart-week" name="chart-range" value="week">
+                <label for="chart-week" style="padding:0.4rem; font-size:0.9rem;">주간 (8주)</label>
+                <input type="radio" id="chart-month" name="chart-range" value="month">
+                <label for="chart-month" style="padding:0.4rem; font-size:0.9rem;">월간 (6개월)</label>
+            </div>
+            <div>
+                <canvas id="weightChart" width="400" height="250"></canvas>
             </div>
         </div>
+    </div>
 
-        <!-- BOTTOM NAVIGATION -->
-        <nav id="bottom-nav" class="bottom-nav hidden">
-            <button class="nav-item active" data-target="dashboard-view">
-                <i class="ri-home-smile-fill"></i>
-                <span>홈</span>
-            </button>
-            <button class="nav-item" data-target="history-view">
-                <i class="ri-history-line"></i>
-                <span>기록</span>
-            </button>
-            <button class="nav-item" data-target="community-view">
-                <i class="ri-wechat-fill"></i>
-                <span>커뮤니티</span>
-            </button>
-        </nav>
+    <!-- BOTTOM NAVIGATION -->
+    <nav id="bottom-nav" class="bottom-nav hidden">
+        <button class="nav-item active" data-target="dashboard-view">
+            <i class="ri-home-smile-fill"></i>
+            <span>홈</span>
+        </button>
+        <button class="nav-item" data-target="history-view">
+            <i class="ri-history-line"></i>
+            <span>기록</span>
+        </button>
+        <button class="nav-item" data-target="community-view">
+            <i class="ri-wechat-fill"></i>
+            <span>커뮤니티</span>
+        </button>
+    </nav>
     </div>
 
     <script type="module" src="app.js"></script>
