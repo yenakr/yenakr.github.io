@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const gender = document.querySelector('input[name="gender"]:checked').value;
         const age = parseInt(document.getElementById('age').value);
-        const height = parseInt(document.getElementById('height').value);
+        const height = parseFloat(document.getElementById('height').value);
         const currentWeight = parseFloat(document.getElementById('currentWeight').value);
         const targetWeight = parseFloat(document.getElementById('targetWeight').value);
         const targetDateStr = document.getElementById('targetDate').value;
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dailyDeficit = Math.round(totalCaloriesToLose / daysRemaining);
         let dailyTarget = tdee - dailyDeficit;
 
-        const safeLimit = 1200;
+        const safeLimit = 1000;
         if (dailyTarget < safeLimit) {
             showWarning(`주의: 계산된 하루 목표 칼로리(${dailyTarget}kcal)가 너무 낮습니다. 최하 ${safeLimit}kcal 이상을 권장합니다. 기간을 늘려주세요.`);
             return;
@@ -447,7 +447,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const finalTDEE = baseTDEE + todayExerciseCalories;
         let dynamicDailyTarget = finalTDEE - goalData.dailyDeficit;
-        const safeLimit = 1200;
+        const safeLimit = 1000;
         if (dynamicDailyTarget < safeLimit) dynamicDailyTarget = safeLimit;
 
         // 체중 로깅 UI 업데이트
