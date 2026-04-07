@@ -91,24 +91,44 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 음식 평균 칼로리 사전
     const foodDictionary = {
-        '바나나': 90, '사과': 52, '고구마': 128, '단호박': 60,
-        '방울토마토': 16, '토마토': 18, '수박': 30, '귤': 40,
-        '닭가슴살': 110, '계란': 75, '삶은계란': 75, '구운계란': 70,
-        '밥': 300, '공기밥': 300, '햇반': 310, '현미밥': 250,
-        '라면': 500, '신라면': 500, '진라면': 500, '불닭볶음면': 530,
-        '우유': 130, '아메리카노': 10, '라떼': 150, '카페라떼': 150, '믹스커피': 50,
-        '콜라': 110, '제로콜라': 0, '사이다': 110,
-        '삼겹살': 330, '소고기': 250, '목살': 270,
-        '짜장면': 800, '짬뽕': 700, '탕수육': 500,
-        '치킨': 300, '양념치킨': 350, '후라이드치킨': 300,
-        '피자': 250, '햄버거': 500, '감자튀김': 350,
-        '김밥': 400, '참치김밥': 500, '떡볶이': 300, '순대': 300, '튀김': 200,
-        '제육볶음': 300, '갈비탕': 450, '김치찌개': 250, '된장찌개': 200,
-        '샌드위치': 400, '서브웨이': 350, '샐러드': 150,
+        // [기본 식재료/과일/채소]
+        '바나나': 90, '사과': 52, '고구마': 128, '단호박': 60, '감자': 66, '옥수수': 100,
+        '방울토마토': 16, '토마토': 18, '수박': 30, '귤': 40, '오렌지': 45, '포도': 60, '딸기': 32, '블루베리': 57,
+        '닭가슴살': 110, '계란': 75, '삶은계란': 75, '구운계란': 70, '계란후라이': 90, '두부': 80,
+        '양상추': 15, '오이': 15, '당근': 41, '브로콜리': 34, '양배추': 25, '파프리카': 20,
+
+        // [밥/면/탄수화물]
+        '밥': 300, '공기밥': 300, '햇반': 310, '현미밥': 250, '잡곡밥': 260, '볶음밥': 450, '오므라이스': 550,
+        '라면': 500, '신라면': 500, '진라면': 500, '불닭볶음면': 530, '짜파게티': 610, '컵라면': 350,
+        '우동': 400, '잔치국수': 350, '비빔국수': 450, '냉면': 400, '물냉면': 400, '비빔냉면': 450,
+        '파스타': 500, '크림파스타': 650, '토마토파스타': 450, '알리오올리오': 450,
+
+        // [음료/카페]
+        '우유': 130, '두유': 110, '아몬드브리즈': 35,
+        '아메리카노': 10, '라떼': 150, '카페라떼': 150, '바닐라라떼': 200, '돌체라떼': 250, '믹스커피': 50,
+        '콜라': 110, '제로콜라': 0, '사이다': 110, '제로사이다': 0, '탄산수': 0,
+        '스타벅스라떼': 180, '자몽허니블랙티': 150, '아이스티': 120, '밀크티': 200, '스무디': 300, '프로틴': 120,
+
+        // [고기/요리류]
+        '삼겹살': 330, '소고기': 250, '목살': 270, '항정살': 400, '갈비': 350,
+        '제육볶음': 300, '소불고기': 250, '감자탕': 500, '갈비탕': 450, '설렁탕': 400, '순대국': 500,
+        '김치찌개': 250, '된장찌개': 200, '부대찌개': 400, '순두부찌개': 250,
+        '돈까스': 600, '치즈돈까스': 700, '생선까스': 550,
+        '초밥': 50, '연어': 150, '광어': 100, '참치': 130, '회': 100,
+        '족발': 800, '보쌈': 700,
+
+        // [중식/양식/패스트푸드]
+        '짜장면': 800, '짬뽕': 700, '탕수육': 500, '볶음밥(중식)': 700, '마라탕': 600,
+        '치킨': 300, '양념치킨': 350, '후라이드치킨': 300, '뿌링클': 400, '구운치킨': 200,
+        '피자': 250, '햄버거': 500, '치즈버거': 400, '싸이버거': 500, '빅맥': 550, '감자튀김': 350,
+
+        // [분식/간식류]
+        '김밥': 400, '참치김밥': 500, '돈까스김밥': 550, '삼각김밥': 200,
+        '떡볶이': 300, '로제떡볶이': 400, '순대': 300, '튀김': 200, '어묵': 100, '핫도그': 250,
+        '샌드위치': 400, '서브웨이': 350, '샐러드': 150, '포케': 350,
         '아몬드': 60, '호두': 65, '땅콩': 50,
-        '식빵': 100, '베이글': 250, '소금빵': 200,
-        '초콜릿': 150, '아이스크림': 200, '과자': 300,
-        '연어': 150, '광어': 100, '초밥': 50
+        '식빵': 100, '베이글': 250, '소금빵': 200, '크로와상': 250, '케이크': 300, '마카롱': 150,
+        '초콜릿': 150, '아이스크림': 200, '과자': 300, '에이스': 150, '홈런볼': 250
     };
 
     const tomorrow = new Date();
@@ -804,4 +824,81 @@ document.addEventListener('DOMContentLoaded', () => {
             renderWeightChart(e.target.value);
         });
     });
+
+    // --- Share Logic ---
+    const shareBtn = document.getElementById('share-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', async () => {
+            // Populate share card
+            document.getElementById('share-date').textContent = document.getElementById('date-display').textContent;
+            document.getElementById('share-food').textContent = document.getElementById('calories-consumed').textContent;
+            document.getElementById('share-exercise').textContent = document.getElementById('today-exercise-calories').textContent;
+            document.getElementById('share-deficit').textContent = document.getElementById('today-deficit').textContent;
+            document.getElementById('share-cumulative-deficit').textContent = document.getElementById('cumulative-deficit').textContent;
+            
+            const expectedLoss = document.getElementById('expected-loss').textContent;
+            document.getElementById('share-expected-loss').textContent = expectedLoss !== '-' ? expectedLoss : '0';
+
+            const shareCard = document.getElementById('share-card');
+            const template = document.getElementById('share-template');
+            
+            // Move into viewport to render properly
+            template.style.left = '0';
+            template.style.top = '0';
+            template.style.zIndex = '-9999';
+            template.style.opacity = '1';
+
+            const originalText = shareBtn.innerHTML;
+            shareBtn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> 로딩 중...';
+            shareBtn.disabled = true;
+
+            try {
+                const canvas = await html2canvas(shareCard, {
+                    scale: 2, 
+                    useCORS: true,
+                    backgroundColor: '#111827'
+                });
+                
+                const dataUrl = canvas.toDataURL('image/png');
+                
+                // Revert template
+                template.style.left = '-9999px';
+                template.style.top = '-9999px';
+
+                try {
+                    const blob = await (await fetch(dataUrl)).blob();
+                    const file = new File([blob], "caloriefit-record.png", { type: "image/png" });
+                    
+                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            title: 'CalorieFit 기록',
+                            text: '나만의 다이어트 기록! 🔥',
+                            files: [file]
+                        });
+                    } else {
+                        throw new Error('Not supported');
+                    }
+                } catch (err) {
+                    console.log("Web Share API fallback:", err);
+                    document.getElementById('generated-image').src = dataUrl;
+                    document.getElementById('image-modal').classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error("공유 이미지 생성 중 오류:", error);
+                alert("이미지 생성에 실패했습니다.");
+                template.style.left = '-9999px';
+                template.style.top = '-9999px';
+            }
+
+            shareBtn.innerHTML = originalText;
+            shareBtn.disabled = false;
+        });
+    }
+
+    const closeImageModalBtn = document.getElementById('close-image-modal-btn');
+    if (closeImageModalBtn) {
+        closeImageModalBtn.addEventListener('click', () => {
+            document.getElementById('image-modal').classList.add('hidden');
+        });
+    }
 });
