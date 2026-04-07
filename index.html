@@ -31,8 +31,13 @@
                         alt="G">
                     Google 계정으로 시작하기
                 </button>
+                <button type="button" id="github-login-btn"
+                    style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.8rem; background:#24292e; color:white; border:none; padding:1rem; border-radius:12px; font-weight:700; font-size:1.1rem; cursor:pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition:transform 0.2s; margin-top: 0.8rem;">
+                    <i class="ri-github-fill" style="font-size: 1.5rem; line-height: 1;"></i>
+                    GitHub 계정으로 시작하기
+                </button>
                 <button type="button" id="guest-login-btn"
-                    style="width:100%; margin-top: 1rem; background:transparent; color:var(--text-muted); border:none; font-weight:600; text-decoration:underline; font-size: 0.9rem; cursor:pointer;">
+                    style="width:100%; margin-top: 1.2rem; background:transparent; color:var(--text-muted); border:none; font-weight:600; text-decoration:underline; font-size: 0.9rem; cursor:pointer;">
                     로그인 없이 체험하기
                 </button>
             </div>
@@ -45,83 +50,79 @@
                     <i class="ri-fire-fill"></i>
                     <h1>CalorieFit</h1>
                 </div>
-                <p class="subtitle">체중 감량 목표를 설정하고 맞춤형 계획을 받아보세요.
-                    <a href="info.html"
-                        style="color: var(--primary); text-decoration: none; font-weight: 500; font-size:0.9rem; display:block; margin-top:0.5rem;"><i
-                            class="ri-information-line"></i> 유지칼로리(TDEE)와 체중 감량 원리 알아보기</a>
-                </p>
+                <p class="subtitle">체중 감량 목표를 설정해보세요.</p>
 
                 <form id="setup-form">
-                    <div class="form-grid">
-                        <div class="input-group">
-                            <label>성별</label>
-                            <div class="toggle-group">
-                                <input type="radio" id="gender-m" name="gender" value="male" checked>
-                                <label for="gender-m">남성</label>
-                                <input type="radio" id="gender-f" name="gender" value="female">
-                                <label for="gender-f">여성</label>
+                    <!-- STEP 1 -->
+                    <div id="setup-step-1" class="form-step">
+                        <h3 style="margin-bottom: 1.5rem; color: var(--primary);">1단계: 기본 신체 정보</h3>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>성별</label>
+                                <div class="toggle-group">
+                                    <input type="radio" id="gender-m" name="gender" value="male" checked>
+                                    <label for="gender-m">남성</label>
+                                    <input type="radio" id="gender-f" name="gender" value="female">
+                                    <label for="gender-f">여성</label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label for="age">나이 (만)</label>
+                                <input type="number" id="age" name="age" required min="10" max="120"
+                                    placeholder="예: 25">
+                            </div>
+                            <div class="input-group">
+                                <label for="height">키 (cm)</label>
+                                <input type="number" id="height" name="height" required min="100" max="250"
+                                    placeholder="예: 175">
+                            </div>
+                        </div>
+                        <button type="button" id="next-step-btn" class="btn-primary mt-6">
+                            다음 <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+
+                    <!-- STEP 2 -->
+                    <div id="setup-step-2" class="form-step hidden">
+                        <button type="button" id="prev-step-btn" class="btn-icon"
+                            style="margin-bottom: 1rem; font-size:1rem; display:flex; align-items:center; gap:0.2rem;"><i
+                                class="ri-arrow-left-line"></i> 이전</button>
+                        <h3 style="margin-bottom: 1.5rem; color: var(--primary);">2단계: 감량 목표 설정</h3>
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="currentWeight">현재 체중 (kg)</label>
+                                <input type="number" id="currentWeight" name="currentWeight" step="0.1" min="30"
+                                    max="250" placeholder="0.0">
+                            </div>
+                            <div class="input-group">
+                                <label for="targetWeight">목표 체중 (kg)</label>
+                                <input type="number" id="targetWeight" name="targetWeight" step="0.1" min="30" max="250"
+                                    placeholder="0.0">
+                            </div>
+                            <div class="input-group">
+                                <label for="startDate">목표 시작일</label>
+                                <input type="date" id="startDate" name="startDate">
+                            </div>
+                            <div class="input-group">
+                                <label for="targetDate">목표 달성일</label>
+                                <input type="date" id="targetDate" name="targetDate">
                             </div>
                         </div>
 
-                        <div class="input-group">
-                            <label for="age">나이 (만)</label>
-                            <input type="number" id="age" name="age" required min="10" max="120" placeholder="예: 25">
+                        <div id="warning-msg" class="warning-msg hidden">
+                            <i class="ri-alert-line"></i> <span id="warning-text"></span>
                         </div>
 
-                        <div class="input-group">
-                            <label for="height">키 (cm)</label>
-                            <input type="number" id="height" name="height" required min="100" max="250"
-                                placeholder="예: 175">
-                        </div>
-
-                        <div class="input-group">
-                            <label for="activity">활동량</label>
-                            <select id="activity" name="activity" required>
-                                <option value="1.2">거의 운동하지 않음 (사무직)</option>
-                                <option value="1.375">가벼운 운동 (주 1~3일)</option>
-                                <option value="1.55">보통 운동 (주 3~5일)</option>
-                                <option value="1.725">격렬한 운동 (주 6~7일)</option>
-                            </select>
-                        </div>
+                        <button type="submit" id="setup-submit-btn" class="btn-primary mt-6">
+                            맞춤 분석 결과 생성하기 <i class="ri-check-line"></i>
+                        </button>
                     </div>
-
-                    <div class="form-grid mt-4">
-                        <div class="input-group">
-                            <label for="currentWeight">현재 체중 (kg)</label>
-                            <input type="number" id="currentWeight" name="currentWeight" required step="0.1" min="30"
-                                max="250" placeholder="0.0">
-                        </div>
-
-                        <div class="input-group">
-                            <label for="targetWeight">목표 체중 (kg)</label>
-                            <input type="number" id="targetWeight" name="targetWeight" required step="0.1" min="30"
-                                max="250" placeholder="0.0">
-                        </div>
-
-                        <div class="input-group">
-                            <label for="startDate">목표 시작일</label>
-                            <input type="date" id="startDate" name="startDate" required>
-                        </div>
-
-                        <div class="input-group">
-                            <label for="targetDate">목표 달성일</label>
-                            <input type="date" id="targetDate" name="targetDate" required>
-                        </div>
-                    </div>
-
-                    <div id="warning-msg" class="warning-msg hidden">
-                        <i class="ri-alert-line"></i> <span id="warning-text"></span>
-                    </div>
-
-                    <button type="submit" class="btn-primary mt-6">
-                        맞춤 분석 결과 생성하기 <i class="ri-arrow-right-line"></i>
-                    </button>
                 </form>
             </div>
         </main>
 
         <!-- DASHBOARD VIEW -->
-        <main id="dashboard-view" class="view hidden">
+        <main id="dashboard-view" class="view hidden" style="padding-bottom: 2rem;">
             <header class="dashboard-header">
                 <div class="date-nav-wrapper">
                     <button id="prev-date" class="btn-icon"><i class="ri-arrow-left-s-line"></i></button>
@@ -174,11 +175,12 @@
                         </div>
                         <div class="sub-stats">
                             <div class="sub-stat-item">
-                                <span class="label">하루 목표 적자량</span>
-                                <div><span class="value" id="daily-deficit">0</span> kcal</div>
+                                <span class="label">오늘 운동 소비량</span>
+                                <div><span class="value" id="today-exercise-calories"
+                                        style="color:var(--success);">0</span> kcal</div>
                             </div>
                             <div class="sub-stat-item">
-                                <span class="label">오늘 만들어낸 적자</span>
+                                <span class="label">오늘의 최종 적자</span>
                                 <div><span class="value highlight" id="today-deficit">0</span> kcal</div>
                             </div>
                         </div>
@@ -192,7 +194,7 @@
                         <div class="stat-content">
                             <span class="label"
                                 style="display:flex; justify-content:space-between; align-items:center;">
-                                <span>체중 (목표까지 <span id="weight-remaining"
+                                <span>체중 (목표 <span id="weight-remaining"
                                         style="color:var(--primary); font-weight:600;">0</span>kg)</span>
                                 <button type="button" id="open-chart-btn" class="btn-icon"
                                     style="font-size:1.2rem; padding:0; color:var(--primary);" title="체중 변화 차트 보기"><i
@@ -213,39 +215,54 @@
                     <div class="glass-card stat-card">
                         <div class="icon-wrapper green"><i class="ri-body-scan-fill"></i></div>
                         <div class="stat-content">
-                            <span class="label">내 유지 칼로리 (TDEE)</span>
+                            <span class="label">내 기본 유지 칼로리</span>
                             <div class="row">
                                 <span class="value" id="tdee-val">0</span> <span class="unit">kcal</span>
                             </div>
+                            <span style="font-size: 0.75rem; color:var(--text-muted);">(BMR × 1.2)</span>
                         </div>
                     </div>
-                    <div class="glass-card stat-card">
-                        <div class="icon-wrapper pink"><i class="ri-heart-pulse-fill"></i></div>
-                        <div class="stat-content">
-                            <span class="label">누적 적자 칼로리</span>
-                            <div class="row">
-                                <span class="value" id="cumulative-deficit">0</span> <span class="unit">kcal</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="glass-card stat-card">
-                        <div class="icon-wrapper teal"><i class="ri-drop-fill"></i></div>
-                        <div class="stat-content">
-                            <span class="label">🔥 예상 체지방 감소량</span>
-                            <div class="row">
-                                <span class="value" id="expected-loss">0</span> <span class="unit">kg</span>
+                    <div class="glass-card stat-card" style="grid-column: 1 / -1; display:flex; align-items:center;">
+                        <div class="icon-wrapper pink"><i class="ri-drop-fill"></i></div>
+                        <div class="stat-content"
+                            style="flex-direction:row; justify-content:space-between; align-items:center;">
+                            <span class="label">🔥 누적 적자 칼로리와 예상 감량치</span>
+                            <div class="row" style="text-align:right;">
+                                <span class="value" id="cumulative-deficit" style="font-size:1.1rem;">0</span> <span
+                                    class="unit">kcal</span>
+                                <span style="margin:0 0.5rem; color:var(--text-muted);">≈</span>
+                                <span class="value" id="expected-loss" style="color:var(--primary);">0</span> <span
+                                    class="unit">kg 감량!</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Exercise Logger (NEW) -->
+            <div class="glass-card logger-card mt-6">
+                <h3 style="color: var(--success);"><i class="ri-run-line"></i> 오늘 한 운동</h3>
+                <form id="exercise-form" class="food-form">
+                    <input type="text" id="exercise-name" placeholder="어떤 운동을 하셨나요? (예: 러닝 30분)" required>
+                    <input type="number" id="exercise-calories" placeholder="소모 (kcal)" required min="1">
+                    <button type="submit" class="btn-primary-small" style="background:var(--success);"><i
+                            class="ri-add-line"></i> 추가</button>
+                </form>
+                <div class="food-list-container">
+                    <ul id="exercise-list" class="food-list"></ul>
+                    <div id="exercise-empty-state" class="empty-state">
+                        <i class="ri-zzz-line"></i>
+                        <p>아직 기록된 운동이 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- Food Logger -->
             <div class="glass-card logger-card mt-6">
-                <h3>식단</h3>
+                <h3 style="color: var(--primary);"><i class="ri-restaurant-2-line"></i> 식단</h3>
                 <form id="food-form" class="food-form">
                     <input type="text" id="food-name" placeholder="무엇을 드셨나요? (예: 바나나)" required>
-                    <input type="number" id="food-calories" placeholder="칼로리 (kcal)" required min="1">
+                    <input type="number" id="food-calories" placeholder="섭취 (kcal)" required min="1">
                     <button type="submit" class="btn-primary-small"><i class="ri-add-line"></i> 추가</button>
                 </form>
                 <div class="food-list-container">
@@ -256,6 +273,48 @@
                         <i class="ri-restaurant-2-line"></i>
                         <p>아직 기록된 음식이 없습니다.</p>
                     </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- HISTORY VIEW (NEW) -->
+        <main id="history-view" class="view hidden" style="padding-bottom: 2rem;">
+            <header class="dashboard-header" style="justify-content: center; margin-bottom: 1.5rem;">
+                <h2>📅 나의 기록 모아보기</h2>
+            </header>
+            <div class="glass-card" style="padding: 1.5rem;">
+                <p class="subtitle" style="text-align: center; margin-bottom: 1.5rem; font-size: 0.9rem;">
+                    지금까지 꾸준히 이어온 달성 기록입니다.
+                </p>
+                <ul id="history-timeline"
+                    style="list-style: none; padding: 0; display:flex; flex-direction:column; gap:1rem;">
+                    <!-- Timeline items rendered here -->
+                </ul>
+            </div>
+        </main>
+
+        <!-- COMMUNITY VIEW -->
+        <main id="community-view" class="view hidden" style="padding-bottom: 2rem;">
+            <header class="dashboard-header" style="justify-content: center;">
+                <h2>💬 핏 커뮤니티</h2>
+            </header>
+
+            <div class="glass-card" style="text-align: center; padding: 3rem 1.5rem;">
+                <div class="icon-wrapper pink"
+                    style="width: 60px; height: 60px; font-size: 2rem; margin: 0 auto 1.5rem auto;">
+                    <i class="ri-chat-smile-3-fill"></i>
+                </div>
+                <h3>다이어트 메이트와 소통하세요!</h3>
+                <p class="subtitle" style="margin-bottom: 1.5rem;">
+                    다이어트 팁이나 오늘의 식단을 사람들과 자유롭게 공유해보세요! 😎
+                </p>
+                <div id="giscus-container" style="margin-top: 1rem; text-align: left;">
+                    <script src="https://giscus.app/client.js" data-repo="yenakr/yenakr.github.io"
+                        data-repo-id="R_kgDOR3u3YQ" data-category="General" data-category-id="DIC_kwDOR3u3Yc4C6PyG"
+                        data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0"
+                        data-input-position="bottom" data-theme="preferred_color_scheme" data-lang="ko"
+                        crossorigin="anonymous" async>
+                        </script>
                 </div>
             </div>
         </main>
@@ -281,6 +340,22 @@
                 </div>
             </div>
         </div>
+
+        <!-- BOTTOM NAVIGATION -->
+        <nav id="bottom-nav" class="bottom-nav hidden">
+            <button class="nav-item active" data-target="dashboard-view">
+                <i class="ri-home-smile-fill"></i>
+                <span>홈</span>
+            </button>
+            <button class="nav-item" data-target="history-view">
+                <i class="ri-history-line"></i>
+                <span>기록</span>
+            </button>
+            <button class="nav-item" data-target="community-view">
+                <i class="ri-wechat-fill"></i>
+                <span>커뮤니티</span>
+            </button>
+        </nav>
     </div>
 
     <script type="module" src="app.js"></script>
