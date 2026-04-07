@@ -839,6 +839,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const expectedLoss = document.getElementById('expected-loss').textContent;
             document.getElementById('share-expected-loss').textContent = expectedLoss !== '-' ? expectedLoss : '0';
 
+            // 목표 데이터(시작일, 디데이) 가져와서 세팅
+            const goalData = JSON.parse(localStorage.getItem('calorieFitGoal'));
+            if (goalData) {
+                document.getElementById('share-start-date').textContent = goalData.startDate;
+                
+                const now = new Date();
+                const target = new Date(goalData.targetDate);
+                const diffTime = target - now;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                document.getElementById('share-dday').textContent = `D-${Math.max(0, diffDays)}`;
+            }
+
             const shareCard = document.getElementById('share-card');
             const template = document.getElementById('share-template');
             
