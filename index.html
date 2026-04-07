@@ -239,22 +239,18 @@
                 </div>
             </div>
 
-            <!-- Exercise Logger (NEW) -->
+            <!-- Exercise Logger (UPDATED) -->
             <div class="glass-card logger-card mt-6">
-                <h3 style="color: var(--success);"><i class="ri-run-line"></i> 오늘 한 운동</h3>
-                <form id="exercise-form" class="food-form">
-                    <input type="text" id="exercise-name" placeholder="어떤 운동을 하셨나요? (예: 러닝 30분)" required>
-                    <input type="number" id="exercise-calories" placeholder="소모 (kcal)" required min="1">
-                    <button type="submit" class="btn-primary-small" style="background:var(--success);"><i
-                            class="ri-add-line"></i> 추가</button>
+                <h3 style="color: var(--success);"><i class="ri-run-line"></i> 오늘 활동 칼로리</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); margin:0.5rem 0 1rem 0;">귀찮게 일일이 추가하실 필요 없습니다.
+                    스마트워치 및 건강 앱에 기록된 오늘의 <strong>활동 칼로리(기초대사량 제외)</strong> 수치만 입력해 주세요!</p>
+                <form id="exercise-form" style="display:flex; align-items:center; gap:0.5rem;">
+                    <input type="number" id="exercise-calories" placeholder="활동 칼로리 입력 (예: 450)" required min="0"
+                        style="flex:1; padding:0.8rem; border-radius:12px; border:1px solid var(--border-soft); font-size:1rem; color:var(--text-main);">
+                    <button type="submit" class="btn-primary-small"
+                        style="background:var(--success); white-space:nowrap; height:auto; padding:0.8rem 1.2rem; font-size:1rem;"><i
+                            class="ri-check-line"></i> 적용</button>
                 </form>
-                <div class="food-list-container">
-                    <ul id="exercise-list" class="food-list"></ul>
-                    <div id="exercise-empty-state" class="empty-state">
-                        <i class="ri-zzz-line"></i>
-                        <p>아직 기록된 운동이 없습니다.</p>
-                    </div>
-                </div>
             </div>
 
             <!-- Food Logger -->

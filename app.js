@@ -554,8 +554,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Exercise Logger Logic ---
     function initExerciseLogger(viewDate) {
         const form = document.getElementById('exercise-form');
-        const list = document.getElementById('exercise-list');
-        const emptyState = document.getElementById('exercise-empty-state');
 
         const tzoffset = viewDate.getTimezoneOffset() * 60000;
         const targetKey = (new Date(viewDate.getTime() - tzoffset)).toISOString().split('T')[0];
@@ -563,61 +561,39 @@ document.addEventListener('DOMContentLoaded', () => {
         let logs = JSON.parse(localStorage.getItem('calorieFitExercises')) || {};
         if (!logs[targetKey]) logs[targetKey] = [];
 
-        const updateUI = () => {
-            list.innerHTML = '';
-            if (logs[targetKey].length === 0) {
-                emptyState.style.display = 'flex';
-            } else {
-                emptyState.style.display = 'none';
-                logs[targetKey].forEach(item => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `
-                        <div class="food-info">
-                            <span class="food-name" style="color:var(--success);">${item.name}</span>
-                            <span class="food-cal">${item.calories} kcal</span>
-                        </div>
-                        <button class="ex-delete-btn delete-btn" data-id="${item.id}" style="color:var(--success); background:rgba(34, 197, 94, 0.1);"><i class="ri-delete-bin-line"></i></button>
-                    `;
-                    list.appendChild(li);
-                });
-            }
-
-            document.querySelectorAll('.ex-delete-btn').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    const id = e.currentTarget.getAttribute('data-id');
-                    logs[targetKey] = logs[targetKey].filter(i => i.id !== id);
-                    localStorage.setItem('calorieFitExercises', JSON.stringify(logs));
-                    syncToCloud();
-                    const stored = JSON.parse(localStorage.getItem('calorieFitGoal'));
-                    if (stored) renderDashboardDate(stored); // Re-render to update Math
-                });
-            });
-        };
-
         const newForm = form.cloneNode(true);
         form.parentNode.replaceChild(newForm, form);
 
-        const nameInput = document.getElementById('exercise-name');
         const calInput = document.getElementById('exercise-calories');
+        
+        // 이전에 저장된 활동 칼로리가 있으면 표시 (logs는 배열이지만 이제 0번째 요소만 사용)
+        if (logs[targetKey].length > 0) {
+            calInput.value = logs[targetKey][0].calories;
+        } else {
+            calInput.value = '';
+        }
 
         newForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const name = nameInput.value.trim();
             const calories = parseInt(calInput.value);
-            if (!name || isNaN(calories)) return;
+            if (isNaN(calories)) return;
 
-            logs[targetKey].push({ id: Date.now().toString(), name, calories });
+            // 리스트 대신 그냥 0번째 인덱스에 단일 항목으로 덮어씌움
+            logs[targetKey] = [{ id: 'total_activity', name: '오늘 활동 칼로리', calories: calories }];
             localStorage.setItem('calorieFitExercises', JSON.stringify(logs));
             syncToCloud();
 
-            nameInput.value = '';
-            calInput.value = '';
+            // 저장되었음을 UI로 피드백
+            calInput.style.borderColor = 'var(--success)';
+            calInput.style.color = 'var(--success)';
+            setTimeout(() => {
+                calInput.style.borderColor = 'var(--border-soft)';
+                calInput.style.color = 'var(--text-main)';
+            }, 1000);
 
             const stored = JSON.parse(localStorage.getItem('calorieFitGoal'));
-            if (stored) renderDashboardDate(stored); // Re-render to calculate new TDEE limits
+            if (stored) renderDashboardDate(stored); // Re-render TDEE limits
         });
-
-        updateUI();
     }
 
     // --- Food Logger Logic ---
