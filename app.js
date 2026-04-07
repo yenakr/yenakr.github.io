@@ -829,81 +829,107 @@ document.addEventListener('DOMContentLoaded', () => {
     const shareBtn = document.getElementById('share-btn');
     if (shareBtn) {
         shareBtn.addEventListener('click', async () => {
-            // Populate share card
-            document.getElementById('share-date').textContent = document.getElementById('date-display').textContent;
-            document.getElementById('share-food').textContent = document.getElementById('calories-consumed').textContent;
-            document.getElementById('share-exercise').textContent = document.getElementById('today-exercise-calories').textContent;
-            document.getElementById('share-deficit').textContent = document.getElementById('today-deficit').textContent;
-            document.getElementById('share-cumulative-deficit').textContent = document.getElementById('cumulative-deficit').textContent;
-            
-            const expectedLoss = document.getElementById('expected-loss').textContent;
-            document.getElementById('share-expected-loss').textContent = expectedLoss !== '-' ? expectedLoss : '0';
-
-            // 목표 데이터(시작일, 디데이) 가져와서 세팅
-            const goalData = JSON.parse(localStorage.getItem('calorieFitGoal'));
-            if (goalData) {
-                document.getElementById('share-start-date').textContent = goalData.startDate;
-                
-                const now = new Date();
-                const target = new Date(goalData.targetDate);
-                const diffTime = target - now;
-                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-                document.getElementById('share-dday').textContent = `D-${Math.max(0, diffDays)}`;
-            }
-
-            const shareCard = document.getElementById('share-card');
-            const template = document.getElementById('share-template');
-            
-            // Move into viewport to render properly
-            template.style.left = '0';
-            template.style.top = '0';
-            template.style.zIndex = '-9999';
-            template.style.opacity = '1';
-
-            const originalText = shareBtn.innerHTML;
-            shareBtn.innerHTML = '<i class="ri-loader-4-line ri-spin"></i> 로딩 중...';
-            shareBtn.disabled = true;
-
             try {
-                const canvas = await html2canvas(shareCard, {
-                    scale: 2, 
-                    useCORS: true,
-                    backgroundColor: '#111827'
-                });
+                // Populate share card safely
+                const shareDateEl = document.getElementById('share-date');
+                if (shareDateEl) shareDateEl.textContent = document.getElementById('date-display')?.textContent || '';
                 
-                const dataUrl = canvas.toDataURL('image/png');
+                const shareFoodEl = document.getElementById('share-food');
+                if (shareFoodEl) shareFoodEl.textContent = document.getElementById('calories-consumed')?.textContent || '0';
                 
-                // Revert template
-                template.style.left = '-9999px';
-                template.style.top = '-9999px';
+                const shareExerciseEl = document.getElementById('share-exercise');
+                if (shareExerciseEl) shareExerciseEl.textContent = document.getElementById('today-exercise-calories')?.textContent || '0';
+                
+                const shareDeficitEl = document.getElementById('share-deficit');
+                if (shareDeficitEl) shareDeficitEl.textContent = document.getElementById('today-deficit')?.textContent || '0';
+                
+                const shareCumDeficitEl = document.getElementById('share-cumulative-deficit');
+                if (shareCumDeficitEl) shareCumDeficitEl.textContent = document.getElementById('cumulative-deficit')?.textContent || '0';
+                
+                const expectedLoss = document.getElementById('expected-loss')?.textContent || '0';
+                const shareExpectedLossEl = document.getElementById('share-expected-loss');
+                if (shareExpectedLossEl) shareExpectedLossEl.textContent = expectedLoss !== '-' ? expectedLoss : '0';
+
+                // 목표 데이터(시작일, 디데이) 가져와서 세팅
+                const goalData = JSON.parse(localStorage.getItem('calorieFitGoal') || 'null');
+                if (goalData) {
+                    const shareStartDateEl = document.getElementById('share-start-date');
+                    if (shareStartDateEl) shareStartDateEl.textContent = goalData.startDate || '-';
+                    
+                    if (goalData.targetDate) {
+                        const now = new Date();
+                        const target = new Date(goalData.targetDate);
+                        const diffTime = target.getTime() - now.getTime();
+                        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                        const shareDdayEl = document.getElementById('share-dday');
+                        if (shareDdayEl) shareDdayEl.textContent = `D-${Math.max(0, diffDays)}`;
+                    }
+                }
+
+                const shareCard = document.getElementById('share-card');
+                const template = document.getElementById('share-template');
+                
+                if (!shareCard || !template) throw new Error("Share template not found");
+
+                // Move into viewport to render properly
+                template.style.left = '0';
+                template.style.top = '0';
+                template.style.zIndex = '-9999';
+                template.style.opacity = '1';
+
+                const originalText = shareBtn.innerHTML;
+                shareBtn.innerHTML = '<i class="ri-loader-4-line" style="animation: spin 1s linear infinite;"></i> 로딩 중...';
+                shareBtn.disabled = true;
 
                 try {
-                    const blob = await (await fetch(dataUrl)).blob();
-                    const file = new File([blob], "caloriefit-record.png", { type: "image/png" });
+                    const canvas = await html2canvas(shareCard, {
+                        scale: 2, 
+                        useCORS: true,
+                        backgroundColor: '#111827'
+                    });
                     
-                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                        await navigator.share({
-                            title: 'CalorieFit 기록',
-                            text: '나만의 다이어트 기록! 🔥',
-                            files: [file]
-                        });
-                    } else {
-                        throw new Error('Not supported');
-                    }
-                } catch (err) {
-                    console.log("Web Share API fallback:", err);
-                    document.getElementById('generated-image').src = dataUrl;
-                    document.getElementById('image-modal').classList.remove('hidden');
-                }
-            } catch (error) {
-                console.error("공유 이미지 생성 중 오류:", error);
-                alert("이미지 생성에 실패했습니다.");
-                template.style.left = '-9999px';
-                template.style.top = '-9999px';
-            }
+                    const dataUrl = canvas.toDataURL('image/png');
+                    
+                    // Revert template
+                    template.style.left = '-9999px';
+                    template.style.top = '-9999px';
 
-            shareBtn.innerHTML = originalText;
-            shareBtn.disabled = false;
+                    try {
+                        const blob = await (await fetch(dataUrl)).blob();
+                        const file = new File([blob], "caloriefit-record.png", { type: "image/png" });
+                        
+                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                            await navigator.share({
+                                title: 'CalorieFit 기록',
+                                text: '나만의 다이어트 기록! 🔥',
+                                files: [file]
+                            });
+                        } else {
+                            throw new Error('Not supported');
+                        }
+                    } catch (err) {
+                        console.log("Web Share API fallback:", err);
+                        document.getElementById('generated-image').src = dataUrl;
+                        document.getElementById('image-modal').classList.remove('hidden');
+                    }
+                } catch (error) {
+                    console.error("공유 이미지 생성 중 오류:", error);
+                    alert("이미지 렌더링 중 오류가 발생했습니다: " + error.message);
+                    template.style.left = '-9999px';
+                    template.style.top = '-9999px';
+                }
+
+                shareBtn.innerHTML = originalText;
+                shareBtn.disabled = false;
+
+            } catch (err) {
+                alert("공유 준비 중 오류가 발생했습니다: " + err.message);
+                console.error(err);
+                if (shareBtn) {
+                    shareBtn.innerHTML = '<i class="ri-instagram-line"></i> 성과 공유하기';
+                    shareBtn.disabled = false;
+                }
+            }
         });
     }
 
